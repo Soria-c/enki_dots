@@ -8,6 +8,7 @@ import MediaToggle from "./widgets/media/MediaToggle"
 import Clock from "./widgets/clock/Clock"
 import { CalendarBase } from "./widgets/clock/CalendarWindow"
 import SysTray from "./widgets/trail/Systrail"
+import Bat from "./widgets/battery/Battery"
 
 // const time = Variable("").poll(1000, "date")
 
@@ -41,6 +42,7 @@ export default function MainBar(monitor: number) {
                     <MediaToggle />
                     <SysTray />
                     <Clock />
+                    <Bat />
                     {/* <CalendarBase /> */}
                 </box>
 
