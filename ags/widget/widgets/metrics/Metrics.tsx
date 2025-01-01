@@ -5,7 +5,7 @@ import Ram from "./Ram";
 
 export default function Metrics() {
     return (
-        <box spacing={7}
+        <box spacing={10}
              className="component-box">
             <Cpu />
             <Ram />

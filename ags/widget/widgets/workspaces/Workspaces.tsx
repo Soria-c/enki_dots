@@ -27,6 +27,8 @@ const numbers: {[key: number]: string} = {
     10: "\u0661\u0660",
 }
 
+const labels: {[key:string]: Widget.Label} = {}
+
 function setClass(active: number, index: number) {
     return () => {
         if (active == index) {
@@ -40,23 +42,8 @@ function setClass(active: number, index: number) {
     }
 }
 function setUP(self: Widget.Box) {
-    self.hook(hyprland, "workspace-added",(a,b, c, D) => self.children.forEach(btn => {
-        let active = hyprland.get_monitor(0).get_active_workspace().id
-        let child = (btn as Widget.Box)
-
-        let id = Number(btn.name)
-        if ( (active != id) && (id == b.id)){
-            child.className = "unfocused"
-        } 
-    },))    
-    .hook(hyprland, "workspace-removed",(_,b) => self.children.forEach(btn => {
-        let active = hyprland.get_monitor(0).get_active_workspace().id
-        let child = (btn as Widget.Box)
-        let id = Number(btn.name)
-        if ( (active != id) && (id == b)){
-            child.className = "unused"
-        } 
-    },))
+    self.hook(hyprland, "workspace-added",(_,b) => labels[b.id].className = "unfocused");
+    self.hook(hyprland, "workspace-removed",(_,b) => labels[b].className = "unused");   
 }
 
 export default function Workspaces() {
@@ -69,13 +56,14 @@ export default function Workspaces() {
                  setup={setUP}>
                 {
                     Array.from({ length: 10 }, (_, i) => i + 1).map(i => {
-                        // print(i)
-                        return (
-                            <label name={i.toString()}
+                        print(i)
+                        let l: Widget.Label = <label name={i.toString()}
                                    label={numbers[i]}
                                    className={bind(hyprland, "focusedWorkspace").as(active => setClass(active.id, i)())}
-                                   />
-                        )
+                                   /> as Widget.Label;
+                        
+                        labels[i] = l;
+                        return l;
                     })
                 }
             </box>

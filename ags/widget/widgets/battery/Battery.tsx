@@ -5,6 +5,7 @@ const battery = Battery.get_default()
 
 print("battery")
 print(battery.capacity)
+
 print(battery.percentage)
 
 export default function Bat() {

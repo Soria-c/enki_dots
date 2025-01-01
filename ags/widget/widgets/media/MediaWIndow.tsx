@@ -16,9 +16,14 @@ export default function MediaWindow() {
                 application={App}
                 marginTop={5}
                 marginRight={220}
+                
                 // setup={w => w.key("Escape", () => App.closeWindow('media-0'))}
                 >
+                    <eventbox              onHoverLost={()=> App.toggle_window("media-0")}
+                    >
                 <Media />
+
+                    </eventbox>
         </window>
     )
 }

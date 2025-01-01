@@ -3,6 +3,8 @@ import { bind, Variable } from "astal"
 import { App, Astal, Gtk, Widget } from "astal/gtk3"
 import Pango from "gi://Pango?version=1.0"
 
+
+
 const notifications = Notifd.get_default()
 const notification_map = Variable<{[key:string]: {[key: string]: any}}>({})
 const not_time = 3000
@@ -181,7 +183,7 @@ function Notification(app_name: string, swtch: Variable<boolean>) {
                           icon={app_name}/>
                 </box>
                 <Actions />
-                <box className={bind(progress_class)}
+                {/* <box className={bind(progress_class)}
                      setup={self => {
                         function update() {
                             print("sww")
@@ -189,7 +191,7 @@ function Notification(app_name: string, swtch: Variable<boolean>) {
                             self.child = <ProgressBar />
                         }
                         self.hook(swtch, update)
-                     }}/>
+                     }}/> */}
             </box>
         </eventbox>
     )
